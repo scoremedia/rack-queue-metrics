@@ -29,7 +29,9 @@ module Rack
     private
 
       def getaddr
-        IPSocket.getaddress(Socket.gethostname).to_s + ':' + ENV['PORT']
+        addr = IPSocket.getaddress(Socket.gethostname).to_s
+        addr += ':' + ENV['PORT'] if ENV['PORT']
+        addr
       rescue SocketError
         nil
       end
